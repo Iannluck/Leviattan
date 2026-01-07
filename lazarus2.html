@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iann Gomes - Desenvolvedor Jr</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /*PALETA DE CORES DO SPOTIFY */
+        :root {
+            --spotify-green: #1DB954;
+            --spotify-green-hover: #1ed760;
+            --spotify-black: #191414;
+            --spotify-white: #FFFFFF;
+            --spotify-dark-gray: #000000;
+            --spotify-medium-gray: #181818;
+            --spotify-light-gray: #b3b3b3;
+            --spotify-card-gray: #1a1a1a;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--spotify-white);
+            background-color: var(--spotify-dark-gray);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--spotify-black);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--spotify-green);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--spotify-white);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--spotify-green);
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--spotify-white);
+        }
+        
+        .hero {
+            padding: 80px 0;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            background: linear-gradient(to bottom, var(--spotify-black) 0%, var(--spotify-dark-gray) 100%);
+        }
+        
+        .hero-content {
+            flex: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--spotify-white);
+        }
+        
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--spotify-green);
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--spotify-light-gray);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--spotify-green);
+            color: var(--spotify-black);
+            padding: 12px 30px;
+            border-radius: 500px; /* Bordas arredondadas estilo Spotify */
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background-color: var(--spotify-green-hover);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(29, 185, 84, 0.3);
+        }
+        
+        .contact-info {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--spotify-light-gray);
+        }
+        
+        .contact-item i {
+            color: var(--spotify-green);
+        }
+        
+        .profile-img {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            max-width: 400px;
+        }
+        
+        .profile-img img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+            border: 5px solid var(--spotify-medium-gray);
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+            background-color: var(--spotify-dark-gray);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            color: var(--spotify-white);
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--spotify-green);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--spotify-light-gray);
+        }
+        
+        /* Education & Experience */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline-item {
+            background-color: var(--spotify-card-gray);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            position: relative;
+            border-left: 4px solid var(--spotify-green);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover {
+            background-color: var(--spotify-medium-gray);
+        }
+        
+        .timeline-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--spotify-white);
+        }
+        
+        .timeline-item .date {
+            color: var(--spotify-green);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-item p {
+            color: var(--spotify-light-gray);
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-category {
+            background-color: var(--spotify-card-gray);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .skill-category:hover {
+            background-color: var(--spotify-medium-gray);
+        }
+        
+        .skill-category h3 {
+            margin-bottom: 20px;
+            color: var(--spotify-green);
+            font-size: 1.4rem;
+        }
+        
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill-tag {
+            background-color: var(--spotify-medium-gray);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--spotify-white);
+            transition: var(--transition);
+        }
+        
+        .skill-tag:hover {
+            transform: translateY(-2px);
+        }
+        
+        .skill-tag.primary {
+            background-color: var(--spotify-green);
+            color: var(--spotify-black);
+        }
+        
+        /* Courses Section */
+        .courses-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .course-card {
+            background-color: var(--spotify-card-gray);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .course-card:hover {
+            background-color: var(--spotify-medium-gray);
+        }
+        
+        .course-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--spotify-white);
+        }
+        
+        .course-card .institution {
+            color: var(--spotify-green);
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .course-card .duration {
+            color: var(--spotify-light-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info-box {
+            background-color: var(--spotify-card-gray);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .contact-info-box:hover {
+            background-color: var(--spotify-medium-gray);
+        }
+        
+        .contact-info-box h3 {
+            margin-bottom: 20px;
+            color: var(--spotify-green);
+        }
+        
+        .contact-info-box p {
+            color: var(--spotify-light-gray);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--spotify-medium-gray);
+            border-radius: 50%;
+            color: var(--spotify-white);
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--spotify-green);
+            color: var(--spotify-black);
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--spotify-black);
+            color: var(--spotify-white);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--spotify-green);
+        }
+        
+        .copyright {
+            color: var(--spotify-light-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-info {
+                justify-content: center;
+            }
+            
+            .profile-img {
+                order: -1;
+            }
+            
+            .profile-img img {
+                max-width: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--spotify-black);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: var(--shadow);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">X</div>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <a href="#home">Início</a>
+                    <a href="#about">Sobre</a>
+                    <a href="#education">Formação</a>
+                    <a href="#skills">Habilidades</a>
+                    <a href="#courses">Cursos</a>
+                    <a href="#contact">Contato</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Iann Gomes</h1>
+                <h2>Desenvolvedor Jr</h2>
+                <p>Olá, sou estudante de Engenharia de Software com forte base em lógica de programação, orientação a objetos e desenvolvimento de aplicativos. Buscando projetos reais para aplicar meus conhecimentos.</p>
+                <a href="#contact" class="btn">Entre em Contato</a>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>(87) 98122-6963</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>ianngomes02@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Olinda, Pernambuco, Brasil</span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-img">
+                <!-- Placeholder para imagem de perfil -->
+                <img src="https://ui-avatars.com/api/?name=Iann+Gomes&size=350&background=1DB954&color=fff&bold=true" alt="Iann Gomes">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Objetivo Profissional</h2>
+            </div>
+            <div class="about-content">
+                <p>Sou um desenvolvedor júnior com foco em Java e desenvolvimento backend. Atualmente cursando Engenharia de Software, busco oportunidades para aplicar meus conhecimentos em projetos reais e crescer profissionalmente na área de tecnologia. Tenho familiaridade com metodologias ágeis como Scrum e Kanban, e estou sempre buscando aprender novas tecnologias e ferramentas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <div class="section-title">
+                <h2>Formação & Experiências</h2>
+            </div>
+            <div class="timeline">
+                <!-- Formação -->
+                <div class="timeline-item">
+                    <h3>Bacharelado em Engenharia de Software</h3>
+                    <div class="date">02/2024 - 06/2027 (Previsão)</div>
+                    <p>Universidade Norte do Paraná</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>Ensino Médio Integral</h3>
+                    <div class="date">Concluído em 12/2019</div>
+                    <p>EREMI</p>
+                </div>
+                
+                <!-- Experiências -->
+                <div class="timeline-item">
+                    <h3>Autônomo</h3>
+                    <div class="date">01/2024 - Atualmente</div>
+                    <p>Self Employed - Meio Período</p>
+                    <p>Pernambuco, Brasil</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tecnologias & Habilidades</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Tecnologias & Ferramentas</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag primary">Java</span>
+                        <span class="skill-tag primary">JDK</span>
+                        <span class="skill-tag">Maven</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">IntelliJ IDEA</span>
+                        <span class="skill-tag">Scrum</span>
+                        <span class="skill-tag">Kanban</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Soft Skills</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Boa Comunicação</span>
+                        <span class="skill-tag">Raciocínio Lógico</span>
+                        <span class="skill-tag">Trabalho em Equipe</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Idiomas</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Português - Fluente</span>
+                        <span class="skill-tag">Inglês - B1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses">
+        <div class="container">
+            <div class="section-title">
+                <h2>Cursos Complementares</h2>
+            </div>
+            <div class="courses-container">
+                <div class="course-card">
+                    <h3>Java Developer</h3>
+                    <div class="institution">FIAP</div>
+                    <div class="duration">60 horas</div>
+                </div>
+                
+                <div class="course-card">
+                    <h3>DevOps</h3>
+                    <div class="institution">FIAP</div>
+                    <div class="duration">60 horas</div>
+                </div>
+                
+                <div class="course-card">
+                    <h3>Git e GitHub</h3>
+                    <div class="institution">DIO</div>
+                    <div class="duration">2 horas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Entre em Contato</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info-box">
+                    <h3>Informações de Contato</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>(87) 98122-6963</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>ianngomes02@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Olinda, Pernambuco, Brasil</span>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/iannluck" target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:ianngomes02@gmail.com" title="E-mail">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/iann-gomes-27b52a229" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h3>Disponibilidade</h3>
+                    <p>Atualmente estou disponível para oportunidades de trabalho como desenvolvedor júnior, projetos freelance ou estágios na área de desenvolvimento de software.</p>
+                    <p>Meu principal foco é desenvolvimento backend com Java, mas estou aberto a aprender novas tecnologias e frameworks.</p>
+                    <a href="mailto:ianngomes02@gmail.com" class="btn" style="margin-top: 20px;">Enviar E-mail</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Iann Gomes</div>
+                <p>Desenvolvedor Jr | Java | Backend</p>
+                <div class="copyright">
+                    &copy; 2026 Iann Gomes. Todos os direitos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Toggle for Mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
